@@ -7,8 +7,8 @@ app.use(express.static("client"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-require("./routes/htmlRoutes.js")(app);
+require("../Que-KC/routes/htmlRoutes.js")(app);
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`Now listening on port: ${PORT}`);
 });
