@@ -1,0 +1,17 @@
+.footer {
+    margin-top: 20px;
+    background: #331310;
+    color: white;
+    padding: 25px;
+    .footerContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .socialMedia {
+        color: white;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
