@@ -1,0 +1,15 @@
+.appBar {
+    background: #331310 !important;
+}
+
+span {
+    color: white;
+}
+
+.btn {
+    &:hover {
+        background-color: #E0BDA1 !important;
+        color: #331310 !important;
+        text-decoration: underline #802A1E !important;
+    }
+}
