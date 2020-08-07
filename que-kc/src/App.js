@@ -20,7 +20,6 @@ function App() {
           <Homepage/>
         </Route>
       </Switch>
-      
     </div>
     </Router>
   );

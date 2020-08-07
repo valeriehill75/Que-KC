@@ -6,6 +6,7 @@ import {Card, CardMedia, CardContent,  Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
+      minWidth: 345,
       maxWidth: 345,
     },
     media: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
       <Card className={classes.root}>
           <CardMedia
             className={classes.media}
-            image="/images/mixed-plate.jpg"
+            image="https://bestroadtripever.com/wp-content/uploads/2013/03/kansascity-18thandvine0011.jpg"
             title="Contemplative Reptile"
           />
           <CardContent>

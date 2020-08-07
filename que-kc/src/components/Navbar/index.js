@@ -1,7 +1,9 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core';
+import { display } from '@material-ui/system';
 import MenuIcon from '@material-ui/icons/Menu';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +40,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             QUE KC CHALLENGE
           </Typography>
-          <Button color="inherit" className="btn">Login</Button>
+          <Button color="inherit" className="btn" display={{ xs: 'none', sm: 'none', md: 'block' }}>Login</Button>
             <span>/</span>
            <Button color="inherit" className="btn">Sign Up</Button> 
         </Toolbar>
