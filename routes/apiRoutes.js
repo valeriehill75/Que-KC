@@ -1,4 +1,6 @@
-const router = require("express");
-const db = require("../models");
+const router = require("express").Router();
+// const db = require("../models/review");
 
-router.length("/")
+router.get('/', (req, res) => { res.json({ msg: 'hi' }) })
+
+module.exports = router;
