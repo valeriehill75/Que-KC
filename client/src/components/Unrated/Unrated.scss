@@ -1,0 +1,18 @@
+.accordianDiv {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.title{
+    background: #A4572A !important;
+    display: flex;
+    justify-content: space-around;
+    .restaurantName {
+        color: white
+    }
+}
+
+.saveButton {
+    color: black !important;
+}
