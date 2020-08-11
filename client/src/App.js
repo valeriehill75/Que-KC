@@ -1,6 +1,7 @@
 import React from 'react';
 import Homepage from './pages/Homepage';
 import Profile from './pages/Profile';
+import PageNotFound from './pages/PageNotFound';
 import './App.scss';
 import {BrowserRouter as  Router, Route, Switch} from "react-router-dom";
 
@@ -17,10 +18,9 @@ function App() {
           <Profile/>
         </Route>
         <Route>
-          <Homepage/>
+          <PageNotFound/>
         </Route>
       </Switch>
-      
     </div>
     </Router>
   );
