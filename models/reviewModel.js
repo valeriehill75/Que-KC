@@ -7,31 +7,31 @@ const ReviewSchema = new Schema({
     foodRating: {
         type: String,
         trim: true,
-        required: "* - ***** is required"
+        required: "A response is required. (1-10 stars)"
     },
     //User reviews the staff "sass" with 1 - 5 stars
     staffSass: {
         type: String,
         trim: true,
-        required: "* - ***** is required"
+        required: "A response is required. (1-10 stars)"
     },
     //User reviews the restroom cleanliness with 1 - 5 stars    
     bathrooms: {
         type: String,
         trim: true,
-        required: "* - ***** is required"
+        required: "A response is required. (1-10 stars)"
     },
     //User types in thier favorite item on the menu    
     faveItem: {
         type: String,
         trim: true,
-        required: "A response is required."
+        required: "A response is required. (What is your favorite menu item?"
     },
     //User describes the entire experience in three words
     threeWords: {
         type: String,
         trim: true,
-        required: "A response is required."
+        required: "A response is required. (Describe your experience in three words."
     },
     //Timestamp on review
    reviewCreated: {
