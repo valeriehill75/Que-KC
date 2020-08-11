@@ -1,8 +1,8 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { Login } from "./pages/Login";
 import "./App.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -19,6 +19,12 @@ function App() {
           </Route>
           <Route>
             <Homepage />
+          </Route>
+          <Route exact path={"/login"}>
+            <Login />
+          </Route>
+          <Route exact path={"/signup"}>
+            <Signup />
           </Route>
         </Switch>
       </div>
