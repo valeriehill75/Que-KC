@@ -5,19 +5,19 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
     //User reviews the food with 1 - 5 stars
     foodRating: {
-        type: String,
+        type: Number,
         trim: true,
         required: "A response is required. (1-10 stars)"
     },
     //User reviews the staff "sass" with 1 - 5 stars
     staffSass: {
-        type: String,
+        type: Number,
         trim: true,
         required: "A response is required. (1-10 stars)"
     },
     //User reviews the restroom cleanliness with 1 - 5 stars    
     bathrooms: {
-        type: String,
+        type: Number,
         trim: true,
         required: "A response is required. (1-10 stars)"
     },
