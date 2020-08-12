@@ -4,6 +4,7 @@ import AppBar from "material-ui/AppBar";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import { StylesContext } from "@material-ui/styles";
+import UserForm from "./UserForm";
 
 export class FormUserDetails extends Component {
   continue = (e) => {

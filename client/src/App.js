@@ -3,7 +3,9 @@ import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+
 import PageNotFound from "./pages/PageNotFound";
+
 import "./App.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
