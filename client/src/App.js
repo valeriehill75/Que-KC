@@ -26,6 +26,9 @@ function App() {
           <Route exact path={"/signup"}>
             <Signup />
           </Route>
+           <Route exact path={"/PageNotFound"}>
+            <PageNotFound />
+          </Route>
         </Switch>
       </div>
     </Router>

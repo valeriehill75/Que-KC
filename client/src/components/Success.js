@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
+import Dialog from "@material-ui/core/Dialog";
+import AppBar from "@material-ui/core/AppBar";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
 export class Success extends Component {
   continue = (e) => {
     e.preventDefault();
+    // PROCESS FORM //
     this.props.nextStep();
   };
 
@@ -16,11 +18,13 @@ export class Success extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <React.Fragment>
-          <AppBar title="Confirm User Data" />
-          <h1>Thank You For Your Submission</h1>
-          <p>Return to Login Page</p>
-        </React.Fragment>
+        <>
+          <Dialog open fullWidth maxWidth="sm">
+            <AppBar title="Success" />
+            <h1>Thank You For Your Submission</h1>
+            <p>You will get an email with further instructions.</p>
+          </Dialog>
+        </>
       </MuiThemeProvider>
     );
   }

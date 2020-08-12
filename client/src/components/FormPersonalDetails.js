@@ -1,64 +1,83 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-import { StylesContext } from "@material-ui/styles";
+import Dialog from "@material-ui/core/Dialog";
+import AppBar from "@material-ui/core/AppBar";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 export class FormPersonalDetails extends Component {
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
   };
+
   back = (e) => {
     e.preventDefault();
     this.props.prevStep();
   };
 
   render() {
-    const { values } = this.props;
-    this.props.values;
+    const { values, handleChange } = this.props;
+
     return (
       <MuiThemeProvider>
-        <React.Fragment>
-          <AppBar title="Enter Personal Details" />
-          <TextField
-            hintText="Enter Your Hometown"
-            floatingLabelText="Hometown"
-            onChange={handleChange("hometown")}
-            defaultValue={values.hometown}
-          />
-          <br />
-          <TextField
-            hintText="Bio"
-            floatingLabelText="Bio"
-            onChange={handleChange("bio")}
-            defaultValue={values.bio}
-          />
-          <br />
-          <RaisedButton
-            label="Continue"
-            primary={true}
-            style={StylesContext.button}
-            onClick={this.continue}
-          />
-          <br />
-          <BackButton
-            label="Back"
-            primary={false}
-            style={StylesContext.button}
-            onClick={this.back}
-          />
-        </React.Fragment>
+        <>
+          <Dialog open fullWidth maxWidth="sm">
+            <AppBar title="Enter Personal Details" />
+
+            <TextField
+              hintText="Enter Your First Name"
+              floatingLabelText="First Name"
+              onChange={handleChange("firstName")}
+              defaultValue={values.firstName}
+            />
+            <br />
+            <TextField
+              hintText="Enter Your Last Name"
+              floatingLabelText="Last Name"
+              onChange={handleChange("lastName")}
+              defaultValue={values.lastName}
+            />
+            <br />
+            <TextField
+              hintText="Enter Your Email"
+              floatingLabelText="Email"
+              onChange={handleChange("email")}
+              defaultValue={values.email}
+            />
+            <br />
+            <TextField
+              hintText="Enter Your City"
+              floatingLabelText="City"
+              onChange={handleChange("city")}
+              defaultValue={values.city}
+            />
+            <br />
+            <TextField
+              hintText="Bio"
+              floatingLabelText="Bio"
+              onChange={handleChange("bio")}
+              defaultValue={values.bio}
+            />
+            <br />
+            <Button
+              label="Continue"
+              color="primary"
+              variant="contained"
+              onClick={this.continue}
+            />
+            <br />
+            <Button
+              label="Back"
+              variant="contained"
+              color="secondary"
+              onClick={this.back}
+            />
+          </Dialog>
+        </>
       </MuiThemeProvider>
     );
   }
 }
-
-const styles = {
-  button: {
-    margin: 15,
-  },
-};
 
 export default FormPersonalDetails;
