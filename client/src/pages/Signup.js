@@ -3,10 +3,10 @@ import Navbar from "../components/Navbar/index";
 import About from "../components/About/index";
 import Container from "../components/Container/index";
 import Footer from "../components/Footer/index";
-import FormUserDetails from "./FormUserDetails";
-import FormPersonalDetails from "./FormPersonalDetails";
-import Confirm from "./Comfirm";
-import Success from "./Success";
+import FormUserDetails from "../components/FormUserDetails";
+import FormPersonalDetails from "../components/FormPersonalDetails";
+import Confirm from "../components/Confirm";
+import Success from "../components/Success";
 import UserForm from "../components/UserForm";
 import e from "express";
 
@@ -14,10 +14,7 @@ export default function Signup() {
   return (
     <>
       <Navbar />
-      <Container>
-        <UserForm />
-      </Container>
-      <About />
+      <FormUserDetails />
       <Footer />
     </>
   );
