@@ -1,17 +1,18 @@
-const db = require("../models/reviewModel");
+const db = require("../models/usersModel");
+
 
 //Defining methods
 module.exports = {
     findAll: function(req, res) {
-        db.UserReview
+        db.UserData
             .find(req.query)
-            .then(dbReview => res.json(dbReview))
+            .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err)); 
     },
     create: function(req, res) {
-        db.UserReview
+        db.UserData
         .create(req.body)
-        .then(dbReview => res.json(dbReview))
+        .then(dbUser => res.json(dbUser))
         .catch(err => res.status(422).json(err));
     }
 }
