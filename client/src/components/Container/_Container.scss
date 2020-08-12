@@ -7,12 +7,17 @@
 }
 
 .jumbotron {
-    margin-top: 200px;
     text-align: center;
     color: white;
     font-family: 'Rowdies', cursive;
-    h1 {
-        margin-top: 300px;
+    background: rgba(255, 0, 0, 0.144);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    h1{
+        align-self: center;
     }
 }
 
