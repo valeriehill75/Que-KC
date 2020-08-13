@@ -18,9 +18,7 @@ export default function Login() {
     <>
       <Navbar />
 
-
       <UserForm />
-
 
       <Footer />
     </>
