@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/reviewModel");
 
 //Defining methods
 module.exports = {
