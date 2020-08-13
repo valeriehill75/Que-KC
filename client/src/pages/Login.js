@@ -7,18 +7,20 @@ import FormUserDetails from "../components/FormUserDetails";
 import FormPersonalDetails from "../components/FormPersonalDetails";
 import Confirm from "../components/Confirm";
 import Success from "../components/Success";
-import UserForm from "../components/UserForm";
+import UserForm from "./components/UserForm";
 
-import e from "express";
-
-export default function Login() {
+const Login = () => {
   return (
     <>
       <Navbar />
 
-      <UserForm />
+      <div className="Login">
+        <UserForm />
+      </div>
 
       <Footer />
     </>
   );
-}
+};
+
+export default Login;
