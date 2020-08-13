@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./routes");
+// const routes = require("./routes");
+const routes = require("./routes/api/users");
 
 //Defining the port
 const PORT = process.env.PORT || 3001;
@@ -16,13 +17,17 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //Mongoose connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/review_db", { useNewUrlParser: true, useFindAndModify: false })
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/review_db", {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("MongoDB Connected..."))
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err));
 
 //Routes - These need to be looked at
-app.use(routes);
-
+// app.use(routes);
+app.use("/users", routes);
 
 //Connecting on PORT 3000
 app.listen(PORT, function () {
