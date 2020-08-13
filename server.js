@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const apiRoutes = require("./routes/api");
+const routes = require("./routes");
 
 //Defining the port
 const PORT = process.env.PORT || 3001;
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/review_db", { u
   .catch(err => console.log(err))
 
 //Routes - These need to be looked at
-app.use("/api", apiRoutes);
+app.use(routes);
 
 
 //Connecting on PORT 3000
