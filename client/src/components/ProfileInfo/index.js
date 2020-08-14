@@ -13,7 +13,9 @@ theme.typography.h1 = {
         fontSize: '3rem',
     },
 };
+
 theme.typography.h3 = {
+    margin: "20px",
     fontSize: '1.2rem',
     '@media (min-width:600px)': {
         fontSize: '1.5rem',
@@ -22,9 +24,6 @@ theme.typography.h3 = {
         fontSize: '2rem',
     },
 };
-
-
-
 
 export default function ProfileInfo() {
     return (

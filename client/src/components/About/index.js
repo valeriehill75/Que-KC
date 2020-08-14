@@ -1,11 +1,13 @@
 import React from 'react';
 import './_About.scss'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 import clsx from 'clsx';
 import {Card, CardMedia, CardContent,  Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
+      minWidth: 345,
       maxWidth: 345,
     },
     media: {
@@ -18,10 +20,11 @@ const useStyles = makeStyles({
   
     return (
         <div className="aboutCards">
-      <Card className={classes.root}>
+      <Card className={classes.root} shadow="none">
           <CardMedia
-            className={classes.media}
-            image="/images/mixed-plate.jpg"
+            component="img"
+            className={classes.media} 
+            src= {require("./StreetSign.jpg")}
             title="Contemplative Reptile"
           />
           <CardContent>
@@ -42,10 +45,10 @@ const useStyles = makeStyles({
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              KC's Top BBQ Restaurants
+              BBQ Tradition
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Our program challenges you to visit the best BBQ spots in the area
+              Kansas City's can trace its BBQ culture back to the 19th century
             </Typography>
           </CardContent>
       </Card>

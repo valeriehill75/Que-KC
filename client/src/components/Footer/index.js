@@ -18,7 +18,7 @@ export default function Footer() {
            <Container className="footerContainer">
                <Typography variant="h5">
                    <Icons/>
-                   Copyright @2020
+                   Copyright &copy;2020
                </Typography>
            </Container>
        </footer>

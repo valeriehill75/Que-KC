@@ -1,83 +1,117 @@
 import React, { useContext } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Grid, Button, Input, FormHelperText, FormControl, TextField, InputAdornment, Typography, Avatar } from '@material-ui/core';
-import MuiAccordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import { makeStyles, useMediaQuery, withStyles } from '@material-ui/core/styles';
+import { Card, CardHeader, CardMedia, CardContent, Grid, Button, Dialog, DialogActions, DialogContent, Input, FormControl, InputAdornment, FormHelperText,Avatar, Typography, DialogTitle, TextField } from '@material-ui/core';
 import { YelpContext } from '../../util/YelpContext';
 import './Unrated.scss';
 
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: 425,
+    maxHeight: 425,
+    [theme.breakpoints.down("930px")]: {
+      minHeight: 0,
+      maxHeight: 0
+    },
+
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: '25ch',
   },
+  media: {
+    maxHeight: 350,
+    paddingTop: '56.25%', // 16:9
+    [theme.breakpoints.down("md")]: {
+      paddingTop: '37%'
+    }, 
+    [theme.breakpoints.down("500px")]: {
+      paddingTop: '43%'
+    }
+  },
+  btn: {
+    color: "white",
+    background: "#9F635A",
+    marginTop: "20px",
+    '&:hover': {
+      background: "#9F635A"
+    }
+  },
+  grid: {
+     justifyContent: "center",
+  },
+  control: {
+    margin: "10px"
+  },
+  backDrop: {
+    background: "rgba(95, 20, 10, 0.643)",
+  }
+
 }));
-
-const Accordion = withStyles({
-  root: {
-    border: '1px solid rgba(0, 0, 0, .125)',
-    boxShadow: 'none',
-    '&:not(:last-child)': {
-      borderBottom: 0,
-    },
-    '&:before': {
-      display: 'none',
-    },
-    '&$expanded': {
-      margin: 'auto',
-    },
-  },
-  expanded: {},
-})(MuiAccordion);
-
-const AccordionSummary = withStyles({
-  root: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
-    borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    marginBottom: -1,
-    minHeight: 56,
-    '&$expanded': {
-      minHeight: 56,
-    },
-  },
-  content: {
-    '&$expanded': {
-      margin: '12px 0',
-    },
-  },
-  expanded: {},
-})(MuiAccordionSummary);
-
-const AccordionDetails = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiAccordionDetails);
 
 export default function Unrated() {
   const classes = useStyles();
   const { businesses } = useContext(YelpContext);
   console.log(businesses);
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   // pass in the props from the yelp api from yelp and map over top 25 results (useContext?)
   return (
-    <>
+    <Grid container spacing={2} className={classes.grid}>
       {businesses &&
-        businesses.map(({ name, image_url, location}) => {
-          return <Accordion>
-                  <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" className="title">
-                    <div className="accordianDiv">
-                      <Avatar alt="Remy Sharp" src={image_url} />
-                      <Typography className="restaurantName">{name}</Typography>
-                      <Typography>{location.display_address[0]} {location.display_address[1]}</Typography>
-                    </div>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Grid container spacing={2}>
-                      <Grid item md={6}>
-                        <FormControl >
+        businesses.map(({ name, image_url, location }) => {
+          return <Grid item xs={12} sm={8} md={6}>
+            <Card className={classes.root}>
+              <CardHeader
+                avatar={
+                  <Avatar alt="Remy Sharp" src={image_url} />
+                }
+                title={name}
+                className="title"
+              />
+              <CardMedia className={classes.media} image={image_url} />
+              <CardContent>
+                <Typography>{location.display_address[0]} {location.display_address[1]}</Typography>
+                {/* on click save the form values to  mongo and removes card from list*/}
+                <Button variant="contained" onClick={handleClickOpen} type="button" className={classes.btn}>
+                  Rate This Restaurant!
+                </Button>
+
+{/* --------------------------------------------------insert modal here------------------------------------------------------------------------------------- */}
+                <Dialog 
+                  open={open} 
+                  onClose={handleClose} 
+                  aria-labelledby="form-dialog-title" 
+                  BackdropProps= {{
+                    classes: {
+                      root: classes.backDrop
+                  }
+                }}
+              >
+                  <DialogTitle id="form-dialog-title">Create Your Rating Here!</DialogTitle>
+                    <DialogContent>                     
+                        <FormControl className={classes.control}>
                           <Input
                             id="standard-adornment-weight"
                             endAdornment={<InputAdornment position="end">/10</InputAdornment>}
@@ -87,10 +121,8 @@ export default function Unrated() {
                             }}
                           />
                           <FormHelperText id="standard-weight-helper-text">Food Rating</FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item sm={6}>
-                        <FormControl >
+                        </FormControl>                    
+                        <FormControl className={classes.control}>
                           <Input
                             id="standard-adornment-weight"
                             endAdornment={<InputAdornment position="end">/10</InputAdornment>}
@@ -100,10 +132,8 @@ export default function Unrated() {
                             }}
                           />
                           <FormHelperText id="standard-weight-helper-text">Rate the sass of the Staff</FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item sm={6}>
-                        <FormControl >
+                        </FormControl>                     
+                        <FormControl className={classes.control}>
                           <Input
                             id="standard-adornment-weight"
                             endAdornment={<InputAdornment position="end">/10</InputAdornment>}
@@ -113,9 +143,7 @@ export default function Unrated() {
                             }}
                           />
                           <FormHelperText id="standard-weight-helper-text">Bathroom Cleanliness</FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12}>
+                        </FormControl>                    
                         <TextField
                           id="standard-full-width"
                           style={{ margin: 8 }}
@@ -126,9 +154,7 @@ export default function Unrated() {
                             shrink: true,
                           }}
                         />
-                        <FormHelperText id="standard-weight-helper-text">Favorite Item</FormHelperText>
-                      </Grid>
-                      <Grid item xs={12}>
+                        <FormHelperText id="standard-weight-helper-text">Favorite Item</FormHelperText>                    
                         <TextField
                           id="standard-full-width"
                           style={{ margin: 8 }}
@@ -140,18 +166,18 @@ export default function Unrated() {
                           }}
                         />
                         <FormHelperText id="standard-weight-helper-text">Describe this restaurant in 3 words</FormHelperText>
-                      </Grid>
-                      <Grid item>
-                        {/* on click save the form values to  mongo and removes accoridan from list*/}
-                        <Button variant="contained" color="secondary">
+                    </DialogContent>                  
+                      <DialogActions>                       
+                        <Button variant="contained" onClick={handleClose} className={classes.btn}>
                           Save
                         </Button>
-                      </Grid>
-                    </Grid>
-                  </AccordionDetails>
-                </Accordion>
+                      </DialogActions>                  
+                </Dialog>
+              </CardContent>
+            </Card>
+          </Grid>
         })
       }
-    </>
+    </Grid>
   );
 }
