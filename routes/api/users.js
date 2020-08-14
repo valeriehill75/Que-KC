@@ -5,10 +5,12 @@ const UserData = require("../../models/usersModel");
 // router.route("/signup").post(signUp);
 // router.route("/login").post(logIn);
 
-router.route("/login").get((req, res) => {
+//access by "localhost:3001/users/"" in postman
+router.route("/").get((req, res) => {
   UserData.find().then((users) => res.json(users));
 });
 
+//access by "localhost:3001/users/signup" in postman
 router.route("/signup").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
