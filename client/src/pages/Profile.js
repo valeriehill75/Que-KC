@@ -6,7 +6,6 @@ import ProfileInfo from '../components/ProfileInfo/index';
 import YelpAPI from '../util/YelpAPI';
 import { YelpContext } from '../util/YelpContext';
 
-
 export default function Profile() {
 
     const [restaurant, setRestaurant] = useState({});
