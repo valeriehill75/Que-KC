@@ -1,68 +1,39 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import MuiAccordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
-import { Typography, Grid } from '@material-ui/core';
+import './_Rated.scss';
+import { Typography, Grid, Card, CardHeader, CardContent } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Accordion = withStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-        border: '1px solid rgba(0, 0, 0, .125)',
-        boxShadow: 'none',
-        '&:not(:last-child)': {
-            borderBottom: 0,
-        },
-        '&:before': {
-            display: 'none',
-        },
-        '&$expanded': {
-            margin: 'auto',
-        },
+        minHeight: 425,
+        maxHeight: 425
     },
-    expanded: {},
-})(MuiAccordion);
-
-const AccordionSummary = withStyles({
-    root: {
-        background: "#A4572A",
-        color: "white",
-        borderBottom: '1px solid rgba(0, 0, 0, .125)',
-        marginBottom: -1,
-        minHeight: 56,
-        '&$expanded': {
-            minHeight: 56,
-        },
-    },
-    content: {
-        '&$expanded': {
-            margin: '12px 0',
-        },
-    },
-    expanded: {},
-})(MuiAccordionSummary);
-
-const AccordionDetails = withStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiAccordionDetails);
+    grid: {
+        margin: "8px"
+    }
+}))
 
 export default function Rated() {
-    const [expanded, setExpanded] = React.useState('panel1');
 
-    const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
+    const classes = useStyles()
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
-        // for each rated restaurant in the database, map to a new Accordian component
+
         <div>
-            <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Rated Restaurant</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Grid container>
+            <Grid container spacing={2} className={classes.grid}>
+                {/*for each rated restaurant in the database, map to a new Accordian component */}
+                <Card classeName={classes.root}>
+                    <CardHeader title="Rated Restaurant" className="title" />
+                    <CardContent>
                         <Grid item xs={12} md={6}>
                             <Typography>Overall Rating: </Typography>
                         </Grid>
@@ -70,7 +41,7 @@ export default function Rated() {
                             <Typography>Staff Sassiness: </Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Typography>Bathroom Cleanliness </Typography>
+                            <Typography>Bathroom Cleanliness: </Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Typography>Favorite dish: </Typography>
@@ -78,10 +49,9 @@ export default function Rated() {
                         <Grid item xs={12}>
                             <Typography>Three words that describe this restaurant: </Typography>
                         </Grid>
-
-                    </Grid>
-                </AccordionDetails>
-            </Accordion>
+                    </CardContent>
+                </Card>
+            </Grid>
 
         </div>
     );
