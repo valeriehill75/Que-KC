@@ -21,7 +21,7 @@ const reviewSchema = new Schema({
     trim: true,
     required: "A response is required. (1-10 stars)",
   },
-  //User types in thier favorite item on the menu
+  //User types in their favorite item on the menu
   faveItem: {
     type: String,
     trim: true,

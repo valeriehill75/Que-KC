@@ -7,7 +7,7 @@ import Footer from "../components/Footer/index";
 // import Confirm from "../components/Confirm";
 // import Success from "../components/Success";
 
-import UserForm from "../components/UserForm";
+// import UserForm from "../components/UserForm";
 
 export default function Login() {
   return (
