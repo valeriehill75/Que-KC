@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-// const routes = require("./routes");
-const userRoute = require("./routes/api/users");
-const reviewRoute = require("./routes/api/review");
+const routes = require("./routes");
+// const userRoute = require("./routes/api/users");
+// const reviewRoute = require("./routes/api/review");
 
 //Defining the port
 const PORT = process.env.PORT || 3001;
@@ -28,9 +28,9 @@ mongoose
   .catch((err) => console.log(err));
 
 //Routes - These need to be looked at
-// app.use(routes);
-app.use("/users", userRoute);
-app.use("/reviews", reviewRoute);
+app.use(routes);
+// app.use("/users", userRoute);
+// app.use("/reviews", reviewRoute);
 
 //Connecting on PORT 3001
 app.listen(PORT, function () {

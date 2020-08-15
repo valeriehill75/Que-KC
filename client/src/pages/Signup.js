@@ -10,7 +10,6 @@ import Confirm from "../components/Confirm";
 import Success from "../components/Success";
 
 import UserForm from "../components/UserForm";
-import e from "express";
 
 export default function Signup() {
   return (

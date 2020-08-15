@@ -11,8 +11,6 @@ import Success from "../components/Success";
 
 import UserForm from "../components/UserForm";
 
-import e from "express";
-
 export default function Login() {
   return (
     <>
@@ -24,5 +22,3 @@ export default function Login() {
     </>
   );
 }
-
-export default Login;
