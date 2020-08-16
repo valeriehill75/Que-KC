@@ -10,6 +10,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review"
+    }
+  ]
 });
 
 const UserData = mongoose.model("User", userSchema);
