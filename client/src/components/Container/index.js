@@ -31,7 +31,7 @@ export default function SimpleContainer() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container className="Container">
+      <Container maxWidth className="Container" mx={0}>
         <ThemeProvider theme={theme}>
           <Typography variant="h1" gutterBottom className="jumbotron">
             QUE KC CHALLENGE

@@ -5,9 +5,9 @@ import "./_Footer.scss";
 function Icons() {
   return (
     <div className="socialMedia">
-      {/* //       <i class="fab fa-facebook-square"></i>
-  //       <i className="fab fa-twitter-square"></i>
-  //       <i className="fab fa-instagram-square"></i> */}
+      <i class="fab fa-facebook-square"></i>
+      <i className="fab fa-twitter-square"></i>
+      <i className="fab fa-instagram-square"></i>
     </div>
   );
 }

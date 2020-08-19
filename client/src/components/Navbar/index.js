@@ -13,8 +13,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const useStyles = makeStyles((theme) =>
-  //commented out makeStyles((theme: Theme))
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
@@ -40,9 +39,9 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -59,7 +58,7 @@ export default function ButtonAppBar() {
               color="inherit"
               aria-label="menu"
             >
-              {/* <MenuIcon onClick={handleClick} /> */}
+              <MenuIcon onClick={handleClick} />
             </IconButton>
             <Menu
               id="simple-menu"
