@@ -14,7 +14,9 @@ router.route("/").get((req, res) => {
 router.route("/signup").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const newUser = new UserData({ email, password });
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const newUser = new UserData({ email, password, firstName, lastName });
 
   newUser.save().then(() => res.json("User added!"));
 });

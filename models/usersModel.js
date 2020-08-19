@@ -10,12 +10,20 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Review"
-    }
-  ]
+      ref: "Review",
+    },
+  ],
 });
 
 const UserData = mongoose.model("User", userSchema);
