@@ -12,4 +12,15 @@ module.exports = {
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(422).json(err));
   },
+  findOne: function (req, res) {
+    db.UserData.findOne({ email: email, password: password }, function (
+      error,
+      user
+    ) {
+      if (err) {
+        console.log(err);
+      }
+      return res.json(user);
+    });
+  },
 };
