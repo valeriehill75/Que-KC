@@ -40,11 +40,24 @@ app.use(
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-// require("./passportConfig")(passport);
+require("./passportConfig")(passport);
+app.post("/api/users/", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.send("No User Exists");
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        res.send("Successfully Authenticated");
+        console.log(req.user);
+      });
+    }
+  })(req, res, next);
+});
 app.post("/api/users/signup", (req, res) => {
   User.findOne({ email: req.body.email }, async (err, doc) => {
     if (err) throw err;
-    if (doc) res.send("User Already Exists");
+    if (doc) res.send("User already exists");
     if (!doc) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -55,7 +68,7 @@ app.post("/api/users/signup", (req, res) => {
         lastName: req.body.lastName,
       });
       await newUser.save();
-      res.send("User Created");
+      res.send("User Created!!");
     }
   });
 });
@@ -72,6 +85,11 @@ mongoose
 
 //ROUTES
 app.use(routes);
+
+//get user route
+app.get("/user", (req, res) => {
+  res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
+});
 
 //Connecting on PORT 3001
 app.listen(PORT, function () {
