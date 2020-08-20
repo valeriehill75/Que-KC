@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +12,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Axios from "axios";
 
 function Copyright() {
   return (
@@ -50,25 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerFirstName, setRegisterFirstName] = useState("");
-  const [registerLastName, setRegisterLastName] = useState("");
-  const register = (event) => {
-    event.preventDefault();
-    Axios({
-      method: "POST",
-      data: {
-        email: registerEmail,
-        password: registerPassword,
-        firstName: registerFirstName,
-        lastName: registerLastName,
-      },
-      withCredentials: true,
-      url: "http://localhost:3001/api/users/signup",
-    }).then((res) => console.log(res));
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -91,7 +70,6 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                onChange={(e) => setRegisterFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -103,7 +81,6 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                onChange={(e) => setRegisterLastName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -115,7 +92,6 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => setRegisterEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -128,7 +104,6 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => setRegisterPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -139,7 +114,6 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
-            onClick={register}
             type="submit"
             fullWidth
             variant="contained"
