@@ -14,7 +14,7 @@ const userSeed = [
         password: "michaelCervantes",
         firstName: "Michael",
         lastName: "Cervantes",
-        reviews: " "
+        reviews: []
     },
     {
         email: "valerieH@email.com",
@@ -133,7 +133,7 @@ const userSeed = [
         password: "blakeHess",
         firstName: "Blake",
         lastName: "Hess",
-        reviews: " "
+        reviews: []
     },
     {
         email: "carrieE@email.com",
