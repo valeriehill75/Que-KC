@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,18 +8,19 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import OutdoorGrillIcon from "@material-ui/icons/OutdoorGrill";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory } from 'react-router-dom';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="#E0BDA1" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Que-KC
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -51,12 +52,31 @@ export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
 
+  const [loginEmail, SetLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const login = (event) => {
+    event.preventDefault();
+    axios({
+      method: "GET",
+      data: {
+        email: loginEmail,
+        password: loginPassword,
+      },
+      withCredentials: true,
+      url: "/api/users/login",
+    }).then((res) => {
+      history.push("/profile");
+      console.log(res);
+    });
+  };
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <OutdoorGrillIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -72,6 +92,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => SetLoginEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -83,12 +104,14 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setLoginPassword(e.target.value)}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="#802A1E" />}
             label="Remember me"
           />
           <Button
+            onClick={login}
             type="submit"
             fullWidth
             variant="contained"
@@ -96,15 +119,10 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container justifycontent>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="client/src/pages/Login.js" variant="body2">
+                New account? Sign up
               </Link>
             </Grid>
           </Grid>
