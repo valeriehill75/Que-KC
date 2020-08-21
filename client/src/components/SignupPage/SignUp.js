@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,8 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Axios from "axios";
-<Container maxWidth="sm"></Container>
+
 
 function Copyright() {
   return (
@@ -51,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerFirstName, setRegisterFirstName] = useState("");
@@ -147,6 +146,7 @@ export default function SignUp() {
           className={classes.submit}
         >
           Sign Up
+
           </Button>
         <Grid container justifycontent="flex-end">
           <Grid item>

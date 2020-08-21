@@ -1,40 +1,63 @@
 const router = require("express").Router();
-// const { signup, login } = require("../../controllers/userController");
 const UserData = require("../../models/usersModel");
 
 import axios from "axios";
-
-// router.route("/signup").post(signUp);
-// router.route("/login").post(logIn);
-
-//access by "localhost:3001/users/"" in postman
-router.route("/").get((req, res) => {
-  UserData.find().then((users) => res.json(users));
-});
-
 //access by "localhost:3001/users/signup" in postman
 router.route("/signup").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
-  const newUser = new UserData({ email, password, firstName, lastName });
 
-  newUser.save().then(() => res.json("User added!"));
+  //beginning of passport code for /signup route
+  UserData.findOne({ email: req.body.email }, async (err, doc) => {
+    if (err) throw err;
+    if (doc) res.send("User Already Exists");
+    if (!doc) {
+      const newUser = new UserData({
+        email,
+        password,
+        firstName,
+        lastName,
+      });
+      await newUser.save();
+      res.send("User Created");
+    }
+  });
 });
 
 //existing user login
 router.route("/").get((req, res) => {
-  UserData.findOne()
+
+//   UserData.findOne()
+//     .populate("reviews")
+//     .then((users) => res.json(users));
+// });
+
+// router.route("/success").post((req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   UserData.findOne(email, password).then((user) => {
+//     res.json(user);
+
+  //logged in user is held in req.user
+  UserData.find()
     .populate("reviews")
     .then((users) => res.json(users));
 });
+router.route("/login").post((req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) throw err;
+    if (!user) res.send("Wrong username or password");
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        res.send("Successfully Authenticated");
+        console.log(req.user);
+      });
+    }
+  })(req, res, next);
 
-router.route("/success").post((req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  UserData.findOne(email, password).then((user) => {
-    res.json(user);
 });
 
 router.route("/confirm").post((req, res) => {
