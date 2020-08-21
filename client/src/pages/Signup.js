@@ -12,7 +12,7 @@ import Footer from "../components/Footer/index";
 export default function Signup() {
   return (
     <>
-      <Navbar /> */
+      <Navbar /> 
       <SignUp />
       <Footer />
     </>
