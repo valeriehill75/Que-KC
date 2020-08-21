@@ -2,7 +2,7 @@ const router = require("express").Router();
 // const { signup, login } = require("../../controllers/userController");
 const UserData = require("../../models/usersModel");
 
-//import axios from "axios";
+import axios from "axios";
 
 // router.route("/signup").post(signUp);
 // router.route("/login").post(logIn);
@@ -25,17 +25,32 @@ router.route("/signup").post((req, res) => {
 
 //existing user login
 router.route("/").get((req, res) => {
-  UserData.find()
+  UserData.findOne()
     .populate("reviews")
     .then((users) => res.json(users));
 });
 
-router.route("/login").post((req, res) => {
+router.route("/success").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   UserData.findOne(email, password).then((user) => {
     res.json(user);
-  });
 });
 
+router.route("/confirm").post((req, res) => {
+  UserData.findOne(email, password)
+    .then((user) => {res.json(user);
+    
+});
+
+    // router.route("/login").post((req, res) => {
+    //   const email = req.body.email;
+    //   const password = req.body.password;
+    //   UserData.findOne(email, password).then((user) => {
+    //     res.json(user);
+    //   });
+    // });
+
+
 module.exports = router;
+
