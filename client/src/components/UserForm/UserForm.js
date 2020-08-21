@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UserLoginInfo from "../UserLoginInfo/UserLoginInfo";
-import UserSignupInfo from "../UserSignupInfo/UserSignupInfo.js";
+import UserSignupInfo from "../SignupPage/UserSignup.js";
 import Confirm from "../Confirm/Confirm";
 import Success from "../Success/Success";
 

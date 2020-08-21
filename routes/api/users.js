@@ -1,18 +1,7 @@
 const router = require("express").Router();
 const UserData = require("../../models/usersModel");
-const passport = require("passport");
-const express = require("express");
-const app = express();
 
-//--------------------------------------------------------------------------------
-//I dont believe we need this route, since '/' get route is at line 38 (KRAMER)
-//------------------------------------------------------------------------------
-// router.route("/").get((req, res) => {
-//   console.log(req.user);//user object is stored in req.user
-//   UserData.find().then((users) => res.json(users));
-// });
-//----------------------------------------------------------------------------------
-
+import axios from "axios";
 //access by "localhost:3001/users/signup" in postman
 router.route("/signup").post((req, res) => {
   const email = req.body.email;
@@ -39,6 +28,18 @@ router.route("/signup").post((req, res) => {
 
 //existing user login
 router.route("/").get((req, res) => {
+
+//   UserData.findOne()
+//     .populate("reviews")
+//     .then((users) => res.json(users));
+// });
+
+// router.route("/success").post((req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   UserData.findOne(email, password).then((user) => {
+//     res.json(user);
+
   //logged in user is held in req.user
   UserData.find()
     .populate("reviews")
@@ -56,6 +57,23 @@ router.route("/login").post((req, res, next) => {
       });
     }
   })(req, res, next);
+
 });
 
+router.route("/confirm").post((req, res) => {
+  UserData.findOne(email, password)
+    .then((user) => {res.json(user);
+    
+});
+
+    // router.route("/login").post((req, res) => {
+    //   const email = req.body.email;
+    //   const password = req.body.password;
+    //   UserData.findOne(email, password).then((user) => {
+    //     res.json(user);
+    //   });
+    // });
+
+
 module.exports = router;
+
