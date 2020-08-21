@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 
 
 function Copyright() {
@@ -49,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -56,7 +60,7 @@ export default function SignUp() {
   const [registerLastName, setRegisterLastName] = useState("");
   const register = (event) => {
     event.preventDefault();
-    Axios({
+    axios({
       method: "POST",
       data: {
         email: registerEmail,
@@ -65,12 +69,17 @@ export default function SignUp() {
         lastName: registerLastName,
       },
       withCredentials: true,
-      url: "http://localhost:3001/api/users",
-    }).then((res) => console.log(res));
+      url: "/api/users/signup",
+    }).then((res) => {
+      history.push("/profile");
+    console.log(res)
+  
+    });
+  
   };
 
-  return ({
-    < Container component = maxWidth = "xs" >
+  return (
+    < Container  maxWidth = "xs" >
     <CssBaseline />
     <div className={classes.paper}>
       <Avatar className={classes.avatar}>
@@ -162,6 +171,7 @@ export default function SignUp() {
     </Box>
   </Container>  
   
-})
+  )
+}
   
 

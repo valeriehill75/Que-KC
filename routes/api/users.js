@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const UserData = require("../../models/usersModel");
 
-import axios from "axios";
 //access by "localhost:3001/users/signup" in postman
 router.route("/signup").post((req, res) => {
   const email = req.body.email;
@@ -63,7 +62,7 @@ router.route("/login").post((req, res, next) => {
 router.route("/confirm").post((req, res) => {
   UserData.findOne(email, password)
     .then((user) => {res.json(user);
-    
+  });
 });
 
     // router.route("/login").post((req, res) => {
