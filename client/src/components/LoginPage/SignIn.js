@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { palette, themeName } from "/ui/theme";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,7 +20,7 @@ import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="#E0BDA1" align="center">
+    <Typography variant="body2" color="primary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Que-KC
@@ -52,13 +55,13 @@ export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
 
-  const [loginEmail, SetLoginEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const login = (event) => {
     event.preventDefault();
     axios({
-      method: "GET",
+      method: "get",
       data: {
         email: loginEmail,
         password: loginPassword,
@@ -72,7 +75,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Container>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -92,7 +95,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={(e) => SetLoginEmail(e.target.value)}
+            onChange={(e) => setLoginEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -107,7 +110,7 @@ export default function SignIn() {
             onChange={(e) => setLoginPassword(e.target.value)}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="#802A1E" />}
+            control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
@@ -119,9 +122,9 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container justifycontent>
+          <Grid container justifycontent="flex-end">
             <Grid item>
-              <Link href="client/src/pages/Login.js" variant="body2">
+              <Link href="/signup" variant="body2">
                 New account? Sign up
               </Link>
             </Grid>

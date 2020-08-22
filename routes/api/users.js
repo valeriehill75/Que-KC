@@ -27,18 +27,6 @@ router.route("/signup").post((req, res) => {
 
 //existing user login
 router.route("/").get((req, res) => {
-
-//   UserData.findOne()
-//     .populate("reviews")
-//     .then((users) => res.json(users));
-// });
-
-// router.route("/success").post((req, res) => {
-//   const email = req.body.email;
-//   const password = req.body.password;
-//   UserData.findOne(email, password).then((user) => {
-//     res.json(user);
-
   //logged in user is held in req.user
   UserData.find()
     .populate("reviews")
@@ -56,23 +44,20 @@ router.route("/login").post((req, res, next) => {
       });
     }
   })(req, res, next);
-
 });
 
 router.route("/confirm").post((req, res) => {
-  UserData.findOne(email, password)
-    .then((user) => {res.json(user);
+  UserData.findOne(email, password).then((user) => {
+    res.json(user);
   });
 });
 
-    // router.route("/login").post((req, res) => {
-    //   const email = req.body.email;
-    //   const password = req.body.password;
-    //   UserData.findOne(email, password).then((user) => {
-    //     res.json(user);
-    //   });
-    // });
-
+// router.route("/login").post((req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   UserData.findOne(email, password).then((user) => {
+//     res.json(user);
+//   });
+// });
 
 module.exports = router;
-
