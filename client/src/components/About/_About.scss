@@ -1,0 +1,22 @@
+.aboutCards {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+    h2 {
+        text-decoration: underline;
+        text-decoration-color: #A4572A;
+    }
+}
+
+@media (max-width: 600px) {
+    .aboutCards{
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .MuiPaper-root {
+            margin-top: inherit;
+        }
+    }
+}

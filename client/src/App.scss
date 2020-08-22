@@ -1,0 +1,10 @@
+@import './components/Navbar/Navbar';
+@import './components/About/About';
+@import './components/Footer/Footer.scss';
+@import './components/Unrated/Unrated.scss';
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
