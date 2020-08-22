@@ -8,12 +8,13 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 //Mongoose connection
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/review_db", {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
     useFindAndModify: false,
   })
   .then(() => console.log("MongoDB Connected..."))
@@ -54,5 +55,5 @@ app.use(routes);
 
 //Connecting on PORT 3001
 app.listen(PORT, function () {
-  console.log(`Now listening on port: ${PORT}!`);
+  console.log(`Now listening on port: ${PORT}!!`);
 });
