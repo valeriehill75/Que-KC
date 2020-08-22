@@ -4,7 +4,7 @@
   "description": "Que KC",
   "main": "server.js",
   "scripts": {
-    "start": "npm run start",
+    "start": "npm run start:prod",
     "start:prod": "nodemon server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
