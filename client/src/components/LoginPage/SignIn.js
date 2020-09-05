@@ -1,3 +1,4 @@
+
 import React, { useState, useContext} from "react";
 import AuthService from '../../Services/AuthService'
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Typography, Container } from "@material-ui/core";
@@ -5,6 +6,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from "../../util/AuthContext";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn(props) {
   const classes = useStyles();
   const history = useHistory();
-
+  
   const [user, setUser] = useState({email: "", password : ""});
   const authContext = useContext(AuthContext);
 
@@ -56,11 +58,11 @@ export default function SignIn(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <OutdoorGrillIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -91,7 +93,7 @@ export default function SignIn(props) {
             onChange = {onChange}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="#802A1E" />}
             label="Remember me"
           />
           <Button
@@ -103,15 +105,10 @@ export default function SignIn(props) {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container justifycontent>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="client/src/pages/Login.js" variant="body2">
+                New account? Sign up
               </Link>
             </Grid>
           </Grid>
