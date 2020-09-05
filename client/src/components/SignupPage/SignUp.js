@@ -1,34 +1,9 @@
-import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import React, { useState, useRef,} from "react";
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Typography, Container } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import AuthService from '../../Services/AuthService'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,29 +29,23 @@ export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
 
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerFirstName, setRegisterFirstName] = useState("");
-  const [registerLastName, setRegisterLastName] = useState("");
-  const register = (event) => {
-    event.preventDefault();
-    axios({
-      method: "POST",
-      data: {
-        email: registerEmail,
-        password: registerPassword,
-        firstName: registerFirstName,
-        lastName: registerLastName,
-      },
-      withCredentials: true,
-      url: "/api/users/signup",
-    }).then((res) => {
-      history.push("/profile");
-    console.log(res)
-  
-    });
-  
-  };
+  const [user, setUser] = useState({firstName: '', lastName: '', email: '', password: ''});
+
+  const onChange = e => {
+    e.preventDefault();
+    setUser({...user, [e.target.name] : e.target.value});
+    console.log(user);
+  }
+
+  const onSubmit = e => {
+    e.preventDefault();
+    AuthService.register(user).then(data=> {
+       const newUser = data;
+       if (newUser) {
+         console.log(newUser)
+       }
+    })
+  }
 
   return (
     < Container  maxWidth = "xs" >
@@ -88,7 +57,7 @@ export default function SignUp() {
       <Typography component="h1" variant="h5">
         Sign up
         </Typography>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} noValidate onSubmit={onSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -100,7 +69,7 @@ export default function SignUp() {
               id="firstName"
               label="First Name"
               autoFocus
-              onChange={(e) => setRegisterFirstName(e.target.value)}
+              onChange={onChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -112,7 +81,7 @@ export default function SignUp() {
               label="Last Name"
               name="lastName"
               autoComplete="lname"
-              onChange={(e) => setRegisterLastName(e.target.value)}
+              onChange={onChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -124,7 +93,7 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              onChange={(e) => setRegisterEmail(e.target.value)}
+              onChange={onChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -137,7 +106,7 @@ export default function SignUp() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => setRegisterPassword(e.target.value)}
+              onChange={onChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -148,15 +117,14 @@ export default function SignUp() {
           </Grid>
         </Grid>
         <Button
-          onClick={register}
           type="submit"
           fullWidth
           variant="contained"
           className={classes.submit}
+          onSubmit={onSubmit}
         >
           Sign Up
-
-          </Button>
+        </Button>
         <Grid container justifycontent="flex-end">
           <Grid item>
             <Link href="#" variant="body2">
@@ -166,11 +134,7 @@ export default function SignUp() {
         </Grid>
       </form>
     </div>
-    <Box mt={5}>
-      <Copyright />
-    </Box>
   </Container>  
-  
   )
 }
   

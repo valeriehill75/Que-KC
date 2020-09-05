@@ -3,7 +3,6 @@ import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-// import PageNotFound from "./pages/PageNotFound";
 import PageNotFound from "./pages/PageNotFound";
 import "./App.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -16,10 +15,10 @@ function App() {
           <Route exact path={"/"}>
             <Homepage />
           </Route>
-          <Route exact path={"/profile"}>
+          <Route  path={"/profile"}>
             <Profile />
           </Route>
-          <Route exact path={"/login"}>
+          <Route path={"/login"}>
             <Login />
           </Route>
           <Route exact path={"/signup"}>
