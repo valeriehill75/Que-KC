@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, useMediaQuery, withStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardMedia, CardContent, Grid, Button, Dialog, DialogActions, DialogContent, Input, FormControl, InputAdornment, FormHelperText,Avatar, Typography, DialogTitle, TextField } from '@material-ui/core';
 import { YelpContext } from '../../util/YelpContext';
+import API from '../../util/API';
+import { AuthContext } from '../../util/AuthContext'; 
 import './Unrated.scss';
 
 function getModalStyle() {
@@ -66,6 +68,7 @@ export default function Unrated() {
   console.log(businesses);
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [formObject, setFormObject] = useState({})
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -75,13 +78,33 @@ export default function Unrated() {
     setOpen(false);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormObject({...formObject, [name]: value});
+  }
 
+  const onSubmit = e => {
+    e.preventDefault();
+    if (formObject) {
+      console.log('hi');
+      API.postReview({
+        foodRating: formObject.foodRating,
+        staffSass: formObject.staffSass,
+        bathrooms: formObject.bathrooms,
+        favItem: formObject.favItem,
+        threeWords: formObject.threeWords
+      })
+
+      console.log(formObject);
+    }
+
+  }
   // pass in the props from the yelp api from yelp and map over top 25 results (useContext?)
   return (
     <Grid container spacing={2} className={classes.grid}>
       {businesses &&
         businesses.map(({ name, image_url, location }) => {
-          return <Grid item xs={12} sm={8} md={6}>
+          return <Grid item xs={12} sm={8} md={6} id={name}>
             <Card className={classes.root}>
               <CardHeader
                 avatar={
@@ -107,7 +130,9 @@ export default function Unrated() {
                     classes: {
                       root: classes.backDrop
                   }
+                 
                 }}
+                  onSubmit={onSubmit}
               >
                   <DialogTitle id="form-dialog-title">Create Your Rating Here!</DialogTitle>
                     <DialogContent>                     
@@ -119,6 +144,8 @@ export default function Unrated() {
                             inputProps={{
                               'aria-label': 'weight',
                             }}
+                            onChange = {handleInputChange}
+                            name="foodRating"
                           />
                           <FormHelperText id="standard-weight-helper-text">Food Rating</FormHelperText>
                         </FormControl>                    
@@ -130,6 +157,8 @@ export default function Unrated() {
                             inputProps={{
                               'aria-label': 'weight',
                             }}
+                            onChange = {handleInputChange}
+                            name="staffSass"
                           />
                           <FormHelperText id="standard-weight-helper-text">Rate the sass of the Staff</FormHelperText>
                         </FormControl>                     
@@ -141,6 +170,8 @@ export default function Unrated() {
                             inputProps={{
                               'aria-label': 'weight',
                             }}
+                            onChange = {handleInputChange}
+                            name = "bathrooms"
                           />
                           <FormHelperText id="standard-weight-helper-text">Bathroom Cleanliness</FormHelperText>
                         </FormControl>                    
@@ -153,6 +184,8 @@ export default function Unrated() {
                           InputLabelProps={{
                             shrink: true,
                           }}
+                          onChange = {handleInputChange}
+                          name="favItem"
                         />
                         <FormHelperText id="standard-weight-helper-text">Favorite Item</FormHelperText>                    
                         <TextField
@@ -164,11 +197,13 @@ export default function Unrated() {
                           InputLabelProps={{
                             shrink: true,
                           }}
+                          onChange = {handleInputChange}
+                          name = "threeWords"
                         />
                         <FormHelperText id="standard-weight-helper-text">Describe this restaurant in 3 words</FormHelperText>
                     </DialogContent>                  
                       <DialogActions>                       
-                        <Button variant="contained" onClick={handleClose} className={classes.btn}>
+                        <Button variant="contained" onClick={handleClose, onSubmit} className={classes.btn}>
                           Save
                         </Button>
                       </DialogActions>                  

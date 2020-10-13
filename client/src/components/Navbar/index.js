@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Menu,
@@ -11,7 +10,10 @@ import {
   Link,
   Hidden,
 } from "@material-ui/core";
+import AuthService from '../../Services/AuthService';
+import { AuthContext } from '../../util/AuthContext';
 import MenuIcon from "@material-ui/icons/Menu";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ButtonAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,6 +49,15 @@ export default function ButtonAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logoutHandler = () => {
+    AuthService.logout().then(data => {
+      if(data.success) {
+        setUser(data.user);
+        setIsAuthenticated(false);
+      }
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -85,7 +97,7 @@ export default function ButtonAppBar() {
                   Sign Up
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleClose, logoutHandler}>Logout</MenuItem>
             </Menu>
           </Hidden>
 
@@ -96,18 +108,33 @@ export default function ButtonAppBar() {
             <Button color="inherit" className="btn" href="/">
               Home
             </Button>
-            <span>/</span>
-            <Button color="inherit" className="btn" href="/profile">
-              Profile
-            </Button>
-            <span>/</span>
-            <Button color="inherit" className="btn" href="/login">
-              Login
-            </Button>
-            <span>/</span>
-            <Button color="inherit" className="btn" href="/signup">
-              Sign Up
-            </Button>
+
+            { !isAuthenticated ? 
+
+              <>             
+                <Button color="inherit" className="btn" href="/login">
+                  Login
+                </Button>
+                <span>/</span>
+                <Button color="inherit" className="btn" href="/signup">
+                  Sign Up
+                </Button>
+              </>
+
+            :
+
+              <>
+                <span>/</span>
+                <Button color="inherit" className="btn" href="/profile">
+                  Profile
+                </Button>
+                <span>/</span>
+                <Button color="inherit" className="btn" href="/" onClick= {logoutHandler}>
+                  Logout
+                </Button>
+              </>
+            }
+
           </Hidden>
         </Toolbar>
       </AppBar>
